@@ -2,7 +2,7 @@
 
 With this module you can set an image to be displayed when hovering over products on category pages.
 
-## Assigning Hover Image using Magento Import
+## Saving Product Hover Image using Magento Import
 
 To update the hover_image attribute on products for **existing images**:
 
