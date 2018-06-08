@@ -2,11 +2,11 @@
     "name": "dmatthew/magento2-hover-image",
     "description": "Change product image on hover on category pages",
     "require": {
-        "php": "~7.0|~7.1",
+        "php": "~7.0.0|~7.1.0",
         "magento/module-catalog": "*"
     },
     "type": "magento2-module",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": [
         "MIT"
     ],
