@@ -2,7 +2,7 @@ define([
     'jquery'
 ], function ($) {
     'use strict';
-    
+
     var mixin = {
 	    /**
          * @private
@@ -87,6 +87,8 @@ define([
 		    		}).on('mouseleave', function() {
 			    		return $widget._OnMouseLeave($(this), $widget);
 			    	});
+            } else {
+	            mainImage.removeAttr('data-hover-image');
             }
         }
     };
