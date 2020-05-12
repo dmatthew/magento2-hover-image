@@ -13,11 +13,11 @@ define([
             $widget._super();
             
             if ($widget.options.jsonConfig !== '') {
-                $widget.renderHoverImage();
+                $widget.renderHoverImages();
             }
         },
 
-        renderHoverImage: function () {
+        renderHoverImages: function () {
             var $widget = this,
             	container = $widget.element.parents('.product-item-info'),
             	mainImage = container.find('.product-image-photo'),
@@ -88,7 +88,8 @@ define([
 			    		return $widget._OnMouseLeave($(this), $widget);
 			    	});
             } else {
-	            mainImage.removeAttr('data-hover-image');
+	            mainImage.removeAttr('data-original-image')
+	            	.removeAttr('data-hover-image');
             }
         }
     };
