@@ -2,48 +2,91 @@ define([
     'jquery'
 ], function ($) {
     'use strict';
-
+    
     var mixin = {
+	    /**
+         * @private
+         */
         _init: function () {
-            this._super();
-            if (this.options.jsonConfig !== '') {
-                this.renderHoverImage();
+	        var $widget = this;
+	        
+            $widget._super();
+            
+            if ($widget.options.jsonConfig !== '') {
+                $widget.renderHoverImage();
             }
         },
 
         renderHoverImage: function () {
-            var container = this.element.parents('.product-item-info');
-            var mainImage = container.find('.product-image-photo');
-            var hoverImage = mainImage.data('hover-image');
+            var $widget = this,
+            	container = $widget.element.parents('.product-item-info'),
+            	mainImage = container.find('.product-image-photo'),
+            	hoverImage = mainImage.attr('data-hover-image');
+            	
             if (!hoverImage) {
                 hoverImage = this.options.jsonConfig['hover_image'];
             }
+            
             if (hoverImage) {
-                mainImage.data('hover-image', hoverImage);
-                mainImage.on('mouseenter', function () {
-                    if ($(this).data('hover-image')) {
-                        $(this).data('original-image', $(this).attr('src'));
-                        $(this).attr('src', $(this).data('hover-image'));
-                    }
-                });
-                mainImage.on('mouseleave', function () {
-                    if ($(this).data('original-image')) {
-                        $(this).attr('src', $(this).data('original-image'));
-                    }
-                });
+                mainImage.attr('data-hover-image', hoverImage)
+	                .on('mouseenter', function () {
+		            	return $widget._OnMouseEnter($(this), $widget);
+		    		}).on('mouseleave', function() {
+			    		return $widget._OnMouseLeave($(this), $widget);
+			    	});
             }
         },
-
-        _ProductMediaCallback: function ($this, response) {
-            this._super($this, response);
-            var container = this.element.parents('.product-item-info');
-            var mainImage = container.find('.product-image-photo');
-            mainImage.data('original-image', response.medium || '');
-            if (response.hasOwnProperty('hover_image')) {
-                mainImage.data('hover-image', response.hover_image);
+        
+        /**
+         * Event for mouse enter event hover image
+         *
+         * @param {Object} $this
+         * @param {Object} $widget
+         * @private
+         */
+        _OnMouseEnter: function($this, $widget) {
+            if ($this.attr('data-hover-image')) {
+                $this.attr('data-original-image', $this.attr('src'));
+                $this.attr('src', $this.attr('data-hover-image'));
             }
-            else {
-                mainImage.data('hover-image', '');
+        },
+        
+        /**
+         * Event for mouse leave event hover image
+         *
+         * @param {Object} $this
+         * @param {Object} $widget
+         * @private
+         */
+        _OnMouseLeave: function($this, $widget) {
+            if ($this.attr('data-original-image')) {
+                $this.attr('src', $this.attr('data-original-image'));
+            }
+        },
+        
+		/**
+         * Callback for product media
+         *
+         * @param {Object} $this
+         * @param {String} response
+         * @param {Boolean} isInProductView
+         * @private
+         */
+        _ProductMediaCallback: function ($this, response, isInProductView) {
+	        var $widget = this,
+	        	container = $widget.element.parents('.product-item-info'),
+            	mainImage = container.find('.product-image-photo')
+	        
+            $widget._super($this, response, isInProductView);
+            
+            if (response.hasOwnProperty('hover_image')) {
+            	mainImage.attr('data-original-image', response.medium || '')
+            		.attr('data-hover-image', response.hover_image)
+            		.on('mouseenter', function () {
+		            	return $widget._OnMouseEnter($(this), $widget);
+		    		}).on('mouseleave', function() {
+			    		return $widget._OnMouseLeave($(this), $widget);
+			    	});
             }
         }
     };
