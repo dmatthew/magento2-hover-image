@@ -79,17 +79,17 @@ define([
 	        
             $widget._super($this, response, isInProductView);
             
+            mainImage.attr('data-original-image', response.medium || '');
+            
             if (response.hasOwnProperty('hover_image')) {
-            	mainImage.attr('data-original-image', response.medium || '')
-            		.attr('data-hover-image', response.hover_image)
+            	mainImage.attr('data-hover-image', response.hover_image)
             		.on('mouseenter', function () {
 		            	return $widget._OnMouseEnter($(this), $widget);
 		    		}).on('mouseleave', function() {
 			    		return $widget._OnMouseLeave($(this), $widget);
 			    	});
             } else {
-	            mainImage.removeAttr('data-original-image')
-	            	.removeAttr('data-hover-image');
+	            mainImage.attr('data-hover-image', '');
             }
         }
     };
