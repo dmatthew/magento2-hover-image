@@ -1,6 +1,8 @@
 <?php
-
 namespace Dmatthew\HoverImage\Helper\Plugin;
+
+use \Magento\Catalog\Helper\Image;
+use \Magento\Catalog\Model\Product as CatalogProduct;
 
 class Swatches
 {
@@ -10,18 +12,16 @@ class Swatches
     private $imageHelper;
 
     public function __construct(
-        \Magento\Catalog\Helper\Image $imageHelper
+        Image $imageHelper
     ) {
         $this->imageHelper = $imageHelper;
     }
 
-    public function aroundGetProductMediaGallery(
+    public function afterGetProductMediaGallery(
         \Magento\Swatches\Helper\Data $subject,
-        \Closure $proceed,
-        \Magento\Catalog\Model\Product $product
+        $result,
+        CatalogProduct $product
     ) {
-        $result = $proceed($product);
-
         $baseHoverImage = $product->getData('hover_image');
         if ($baseHoverImage) {
             $hoverImage = $this->imageHelper->init($product, 'category_page_grid_hover')
@@ -29,6 +29,7 @@ class Swatches
                 ->getUrl();
             $result['hover_image'] = $hoverImage;
         }
+        
         return $result;
     }
 }
