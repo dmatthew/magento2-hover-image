@@ -2,7 +2,7 @@
     "name": "dmatthew/magento2-hover-image",
     "description": "Change product image on hover on category pages",
     "require": {
-        "php": "^7.1",
+        "php": "^7.1||^8.1",
         "magento/module-catalog": "*"
     },
     "type": "magento2-module",
