@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magento\Swatches\Block\Product\Renderer\Listing\Configurable">
-        <plugin name="dmatthew_product_listing_hover_image" type="Dmatthew\HoverImage\Block\Plugin\Product\Renderer\Listing\Configurable" />
-    </type>
-    <type name="Magento\Swatches\Helper\Data">
-        <plugin name="dmatthew_media_gallery_add_hover_image" type="Dmatthew\HoverImage\Helper\Plugin\Swatches" />
+    <type name="Magento\Catalog\Block\Product\ImageFactory">
+        <plugin name="dmatthew_product_list_hover_image" type="Dmatthew\HoverImage\Block\Plugin\Product\ImageFactory" />
     </type>
 </config>
