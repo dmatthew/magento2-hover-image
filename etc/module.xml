@@ -4,7 +4,6 @@
     <module name="Dmatthew_HoverImage" setup_version="2.0.0">
         <sequence>
             <module name="Magento_Catalog"/>
-            <module name="Magento_Swatches"/>
         </sequence>
     </module>
 </config>
