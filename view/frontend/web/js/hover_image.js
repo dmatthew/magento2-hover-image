@@ -11,9 +11,6 @@ define([
             var container = this.element.parents('.product-item-info');
             var mainImage = container.find('.product-image-photo');
             var hoverImage = mainImage.data('hover-image');
-            // if (!hoverImage) {
-            //     hoverImage = this.options.jsonConfig['hover_image'];
-            // }
             if (hoverImage) {
                 mainImage.data('hover-image', hoverImage);
                 mainImage.on('mouseenter', function () {
